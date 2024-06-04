@@ -1,10 +1,20 @@
+import { useDispatch } from "react-redux";
+import { articleActions } from "../store";
+
 const Article = ({ article }) => {
-  const { title, content } = article;
+  const dispatch = useDispatch();
+  const { id, title, content, favorite } = article;
+
+  const favoriteHandler = () => {
+    dispatch(articleActions.addToFavorite(id));
+  };
   return (
     <div className="addArticle-wrapper">
       <h1>{title}</h1>
       <p>{content}</p>
-      {/* <button>Add to favorite</button> */}
+      <button onClick={favoriteHandler}>
+        {!favorite ? "Add to Favorites" : "Remove from Favorites"}
+      </button>
     </div>
   );
 };
