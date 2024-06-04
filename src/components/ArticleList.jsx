@@ -4,8 +4,6 @@ import Article from "./Article";
 const ArticleList = () => {
   const articles = useSelector((state) => state.article.articles);
 
-  console.log(articles);
-
   return (
     <div>
       {articles.map((a) => (

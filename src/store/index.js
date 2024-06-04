@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
-const articlesInitialState = { articles: [], toggleAdd: false };
+const articlesInitialState = { articles: [], favorites: [], toggleAdd: false };
 
 const articleSlice = createSlice({
   name: "article",
@@ -25,9 +25,23 @@ const articleSlice = createSlice({
       state.articles = [newArticle, ...state.articles];
       state.toggleAdd = false;
     },
+
+    addToFavorite(state, action) {
+      const id = action.payload;
+      state.articles = state.articles.map((article) =>
+        article.id === id
+          ? { ...article, favorite: !article.favorite }
+          : article
+      );
+
+      state.favorites = state.articles.filter((article) => article.favorite);
+      // console.log(state.favorites);
+    },
+
     addShow(state) {
       state.toggleAdd = true;
     },
+
     hideShow(state) {
       state.toggleAdd = false;
     },
