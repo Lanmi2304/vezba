@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 import Article from "./Article";
 import Search from "./Search";
+import NoArticles from "./NoArticles";
 
 const ArticleList = () => {
   const searchTerm = useSelector((state) => state.article.search);
@@ -18,7 +19,7 @@ const ArticleList = () => {
         {filteredArticles.length > 0 ? (
           filteredArticles.map((a) => <Article key={a.id} article={a} />)
         ) : (
-          <p>Nothing to show</p>
+          <NoArticles />
         )}
       </div>
     </>
