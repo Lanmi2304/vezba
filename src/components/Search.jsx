@@ -4,6 +4,7 @@ import { articleActions } from "../store";
 const Search = () => {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.article.search);
+  const articleLen = useSelector((state) => state.article.articles).length;
 
   const searchHandler = (e) => {
     dispatch(articleActions.searchByTitle(e.target.value));
@@ -11,7 +12,9 @@ const Search = () => {
 
   return (
     <>
-      <input value={search} type="text" onChange={(e) => searchHandler(e)} />
+      {articleLen > 0 && (
+        <input value={search} type="text" onChange={(e) => searchHandler(e)} />
+      )}
     </>
   );
 };
