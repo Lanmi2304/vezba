@@ -1,7 +1,13 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
-const articlesInitialState = { articles: [], favorites: [], toggleAdd: false };
+const articlesInitialState = {
+  articles: [],
+  favorites: [],
+  filteredArticles: [],
+  toggleAdd: false,
+  search: "",
+};
 
 const articleSlice = createSlice({
   name: "article",
@@ -23,6 +29,7 @@ const articleSlice = createSlice({
         favorite: false,
       };
       state.articles = [newArticle, ...state.articles];
+      console.log(state.articles);
       state.toggleAdd = false;
     },
 
@@ -36,6 +43,11 @@ const articleSlice = createSlice({
 
       state.favorites = state.articles.filter((article) => article.favorite);
       // console.log(state.favorites);
+    },
+
+    searchByTitle: (state, action) => {
+      state.search = action.payload;
+      // console.log(state.articles);
     },
 
     addShow(state) {
